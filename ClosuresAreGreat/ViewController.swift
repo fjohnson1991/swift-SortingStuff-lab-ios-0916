@@ -13,42 +13,26 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        performOperation(with: 3, 4, 5) { (numOne, numTwo) -> Double in
+        _ = performOperation(with: 3, 4, 5, operatrion: +)
+        _ = performOperation(with: 1, 2, 5, operatrion: -)
+        _ =  performOperation(with: 9, 9, 9, 9, -5, operatrion: /)
 
-            return 0
-        }
-
-        
     }
     
     func performOperation(with numbers: Double..., operatrion: (Double, Double) -> Double) -> Double {
-        var returnVar = numbers
-        numbers.reduce(numbers[0]) { (numOne, numTwo) -> Double in
-            print("numOne: \(numOne)")
-            print("numTwo: \(numTwo)")
-            // either want to ignore numOne after the first iteration or make numOne = numTwo and ignore numTwo -> returning a double so somehow return the num you want to use in next iteration? 
-            if numTwo != numbers[0] {
-                returnVar.remove(at: 0)
-            }
-            returnVar = numbers
-//            if sum < numOne {
-//                sum += numOne
-//                sum - numTwo
-//
-//            } else {
-//                sum += numTwo
-//            }
-//            
-//            print("sum \(sum)")
-//            return numOne
-//        }
         
-//        return sum
-            print(returnVar)
-            return numbers
+        var numbers = numbers
+        let initial = numbers.removeFirst()
+        var operation = 0.0
+        var finalResult = 0.0
+        numbers.reduce(initial) { (initial, numTwo) -> Double in
+            operation = operatrion(initial, numTwo)
+            return operation
         }
         
-        return numbers
+        finalResult = operation
+        print(finalResult)
+        return finalResult
     }
     
 }
